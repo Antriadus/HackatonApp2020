@@ -2,7 +2,7 @@ import 'package:hack2020/models/planet.dart';
 import 'package:hack2020/models/planet_position.dart';
 import 'package:hack2020/services/planet/interface.dart';
 
-class PlanetServiceInMemoryImpl extends PlanetService {
+class PlanetServiceInMemoryImpl implements PlanetService {
   @override
   Future<List<Planet>> getPlanets() {
     return Future.value([

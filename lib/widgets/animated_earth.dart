@@ -15,20 +15,19 @@ class AnimatedEarthWidget extends StatelessWidget {
         stream: arePlanetsShownSubject,
         builder: (context, snapshot) {
           return StreamBuilder<bool>(
-            stream: arePlanetsShownSubject,
-            builder: (context, snapshot) {
-              var isOnBottom = snapshot?.data ?? false;
-              return AnimatedPositioned(
-                  top: isOnBottom ? displayHeight * 0.7 : displayHeight * 0.4,
-                  curve: Curves.fastOutSlowIn,
-                  duration: Duration(seconds: 2),
-                  child: Container(
-                    color: Colors.white10,
-                    height: 600,
-                    width: MediaQuery.of(context).size.width,
-                  ));
-            },
-          );
+              stream: arePlanetsShownSubject,
+              builder: (context, snapshot) {
+                var isOnBottom = snapshot?.data ?? false;
+                return AnimatedPositioned(
+                    top: isOnBottom ? displayHeight * 0.7 : displayHeight * 0.4,
+                    curve: Curves.fastOutSlowIn,
+                    duration: Duration(seconds: 2),
+                    child: Image.asset(
+                      "assets/earth.jpg",
+                      height: 600,
+                      width: MediaQuery.of(context).size.width,
+                    ));
+              });
         });
   }
 }

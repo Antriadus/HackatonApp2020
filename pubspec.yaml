@@ -29,8 +29,7 @@ flutter:
   uses-material-design: true
 
   assets:
-    - assets/earth/
-    - assets/stars/
+    - assets/
 
 
   # fonts:

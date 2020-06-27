@@ -12,7 +12,7 @@ part 'planet_state.dart';
 class PlanetBloc extends Bloc<PlanetEvent, PlanetState> {
   @override
   PlanetState get initialState => PlanetInitialState();
-  final PlanetService planetService = PlanetServiceInMemoryImpl();
+  // final PlanetService planetService = PlanetServiceInMemoryImpl();
   @override
   Stream<PlanetState> mapEventToState(
     PlanetEvent event,

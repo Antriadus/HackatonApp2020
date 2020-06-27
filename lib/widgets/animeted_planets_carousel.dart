@@ -27,7 +27,7 @@ class AnimatedPlanetsCarouselWidget extends StatelessWidget {
               opacity: isVisble ? 1.0 : 0.0,
               curve: Curves.fastOutSlowIn,
               child: Padding(
-                padding: const EdgeInsets.only(top: 45, left: 32),
+                padding: const EdgeInsets.only(top: 45),
                 child: Container(
                   width: displayWidth,
                   height: 200,
@@ -61,6 +61,16 @@ class _PlanetCarouselState extends State<PlanetCarousel> {
       name: "Venus",
     ),
     Planet(
+      distanceKilometers: "22 321 316",
+      imagePath: "",
+      name: "Uran",
+    ),
+    Planet(
+      distanceKilometers: "343 244",
+      imagePath: "",
+      name: "Jowisz",
+    ),
+    Planet(
       distanceKilometers: "1 320 31 16",
       imagePath: "",
       name: "Mars",
@@ -70,29 +80,42 @@ class _PlanetCarouselState extends State<PlanetCarousel> {
       imagePath: "",
       name: "Saturn",
     ),
+    Planet(
+      distanceKilometers: "123 222 332 041",
+      imagePath: "",
+      name: "Neptun",
+    ),
+    Planet(
+      distanceKilometers: "1 320 31 16",
+      imagePath: "",
+      name: "Mars",
+    ),
   ];
   @override
   Widget build(BuildContext context) {
-    return CarouselSlider(
-      options: CarouselOptions(
+    return Center(
+      child: CarouselSlider(
+        options: CarouselOptions(
           height: 400.0,
           enableInfiniteScroll: true,
           initialPage: 1,
           onPageChanged: (index, reason) {
             currentItemSubject.add(index);
           },
-          viewportFraction: 0.5),
-      items: planets.map((item) {
-        return StreamBuilder<int>(
-            initialData: 1,
-            stream: currentItemSubject,
-            builder: (context, snapshot) {
-              return PlanetCarouselItem(
-                model: item,
-                isSelected: item == planets[snapshot.data],
-              );
-            });
-      }).toList(),
+          viewportFraction: MediaQuery.of(context).size.width > 800 ? 0.2 : 0.4,
+        ),
+        items: planets.map((item) {
+          return StreamBuilder<int>(
+              initialData: 1,
+              stream: currentItemSubject,
+              builder: (context, snapshot) {
+                return PlanetCarouselItem(
+                  model: item,
+                  isSelected: item == planets[snapshot.data],
+                );
+              });
+        }).toList(),
+      ),
     );
   }
 }
@@ -111,8 +134,8 @@ class PlanetCarouselItem extends StatelessWidget {
           child: AnimatedContainer(
               duration: const Duration(milliseconds: 400),
               height: isSelected ? 200 : 150,
+              width: isSelected ? 200 : 150,
               color: Colors.white10,
-              width: MediaQuery.of(context).size.width,
               child: Center(
                 child: Text(
                   model.name,

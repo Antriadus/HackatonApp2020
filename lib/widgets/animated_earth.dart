@@ -19,7 +19,7 @@ class AnimatedEarthWidget extends StatelessWidget {
             builder: (context, snapshot) {
               var isOnBottom = snapshot?.data ?? false;
               return AnimatedPositioned(
-                  top: isOnBottom ? displayHeight * 0.8 : displayHeight * 0.4,
+                  top: isOnBottom ? displayHeight * 0.7 : displayHeight * 0.4,
                   curve: Curves.fastOutSlowIn,
                   duration: Duration(seconds: 2),
                   child: Container(

@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:hack2020/pages/home.dart';
-import 'package:hack2020/pages/planets_map.dart';
 import 'package:hack2020/pages/select_spaceship.dart';
 
 void main() {

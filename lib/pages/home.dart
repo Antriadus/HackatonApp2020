@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:hack2020/pages/select_spaceship.dart';
 import 'package:hack2020/widgets/animated_app_title.dart';
 import 'package:hack2020/widgets/animated_back_button.dart';
 import 'package:hack2020/widgets/animated_earth.dart';
 import 'package:hack2020/widgets/animeted_planets_carousel.dart';
-import 'package:hack2020/widgets/fab.dart';
+import 'package:hack2020/widgets/app_button.dart';
 import 'package:rxdart/subjects.dart';
 
 class HomePage extends StatefulWidget {
@@ -13,21 +14,39 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   BehaviorSubject<bool> arePlanetsShownSubject =
-      BehaviorSubject<bool>.seeded(true);
+      BehaviorSubject<bool>.seeded(false);
 
   @override
   void dispose() {
     arePlanetsShownSubject.close();
+    super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        actions: [
+          MaterialButton(
+            child: Text("GO TO SPACESHIPS"),
+            onPressed: () => Navigator.of(context).push(MaterialPageRoute(
+              builder: (context) {
+                return SelectSpaceship();
+              },
+            )),
+          )
+        ],
+      ),
       backgroundColor: Colors.black,
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
-      floatingActionButton: BottomFab(
-        onPressed: () => arePlanetsShownSubject.add(true),
-        text: "START YOUR TRAVEL",
+      floatingActionButton: Container(
+        height: 54,
+        child: AppButton(
+          'BOOK A SEAT',
+          onTap: () {
+            arePlanetsShownSubject.add(true);
+          },
+        ),
       ),
       body: SafeArea(
         child: Stack(

@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 
 class AppBackButton extends StatelessWidget {
+  final void Function() onPressed;
+
+  const AppBackButton({@required this.onPressed});
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -31,7 +34,7 @@ class AppBackButton extends StatelessWidget {
             child: Material(
               color: Colors.transparent,
               child: InkWell(
-                onTap: () => Navigator.of(context).pop(),
+                onTap: () => onPressed(),
                 child: Center(
                   child: Image.asset('assets/arrow_back.png'),
                 ),

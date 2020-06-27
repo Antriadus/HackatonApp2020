@@ -23,8 +23,8 @@ class _SelectSpaceshipState extends State<SelectSpaceship>
   @override
   void initState() {
     super.initState();
-    animationController = AnimationController(
-        duration: const Duration(seconds: 1), vsync: this);
+    animationController =
+        AnimationController(duration: const Duration(seconds: 1), vsync: this);
 
     animation = Tween<double>(begin: 0, end: 300).animate(animationController)
       ..addListener(() {
@@ -102,7 +102,9 @@ class _SelectSpaceshipState extends State<SelectSpaceship>
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: <Widget>[
-          AppBackButton(),
+          AppBackButton(
+            onPressed: () => Navigator.of(context).pop(),
+          ),
           Image.asset('assets/logo.png'),
           const SizedBox(width: 66.0)
         ],

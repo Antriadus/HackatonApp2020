@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:rxdart/rxdart.dart';
 
+import 'app_back_button.dart';
+
 class AnimatedBackButtonWidget extends StatelessWidget {
   final BehaviorSubject<bool> arePlanetsShownSubject;
 
@@ -14,19 +16,14 @@ class AnimatedBackButtonWidget extends StatelessWidget {
         stream: arePlanetsShownSubject,
         builder: (context, snapshot) {
           var isVisble = snapshot?.data ?? false;
-          return GestureDetector(
-            onTap: () => arePlanetsShownSubject.add(false),
-            child: AnimatedOpacity(
-              duration: Duration(seconds: 2),
-              opacity: isVisble ? 1.0 : 0.0,
-              curve: Curves.fastOutSlowIn,
-              child: Padding(
-                padding: const EdgeInsets.only(top: 45, left: 32),
-                child: Container(
-                  width: 50,
-                  height: 50,
-                  color: Colors.red,
-                ),
+          return AnimatedOpacity(
+            duration: Duration(seconds: 2),
+            opacity: isVisble ? 1.0 : 0.0,
+            curve: Curves.fastOutSlowIn,
+            child: Padding(
+              padding: const EdgeInsets.only(top: 45, left: 32),
+              child: AppBackButton(
+                onPressed: () => arePlanetsShownSubject.add(false),
               ),
             ),
           );

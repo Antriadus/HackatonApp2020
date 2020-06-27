@@ -1,11 +1,17 @@
 import 'package:flutter/widgets.dart';
 import 'package:hack2020/models/planet.dart';
 
-class PlanetCarouselItem extends StatelessWidget {
+class PlanetCarouselItem extends StatefulWidget {
   final Planet model;
   final bool isSelected;
 
   const PlanetCarouselItem({this.model, this.isSelected});
+
+  @override
+  _PlanetCarouselItemState createState() => _PlanetCarouselItemState();
+}
+
+class _PlanetCarouselItemState extends State<PlanetCarouselItem> {
   @override
   Widget build(BuildContext context) {
     return Align(
@@ -14,8 +20,8 @@ class PlanetCarouselItem extends StatelessWidget {
           padding: const EdgeInsets.all(8.0),
           child: AnimatedContainer(
               duration: const Duration(milliseconds: 200),
-              height: isSelected ? 150 : 120,
-              width: isSelected ? 150 : 120,
+              height: widget.isSelected ? 150 : 120,
+              width: widget.isSelected ? 150 : 120,
               child: Center(
                   child: Image.asset(
                 "assets/earth.jpg",

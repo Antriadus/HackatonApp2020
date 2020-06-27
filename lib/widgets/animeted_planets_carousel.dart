@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:hack2020/models/planet.dart';
 import 'package:hack2020/widgets/planet_carousel_item.dart';
 import 'package:rxdart/rxdart.dart';
+import 'package:video_player/video_player.dart';
 
 class AnimatedPlanetsCarouselWidget extends StatelessWidget {
   final BehaviorSubject<bool> arePlanetsShownSubject;
@@ -31,7 +32,7 @@ class AnimatedPlanetsCarouselWidget extends StatelessWidget {
                 padding: const EdgeInsets.only(top: 45),
                 child: Container(
                   width: displayWidth,
-                  height: 200,
+                  height: 400,
                   child: PlanetCarousel(),
                 ),
               ),
@@ -50,6 +51,7 @@ class PlanetCarousel extends StatefulWidget {
 
 class _PlanetCarouselState extends State<PlanetCarousel> {
   BehaviorSubject<int> currentItemSubject = BehaviorSubject<int>.seeded(1);
+
   var planets = [
     Planet(
       distanceKilometers: "10 321 23",
@@ -92,14 +94,26 @@ class _PlanetCarouselState extends State<PlanetCarousel> {
       name: "Mars",
     ),
   ];
+
   @override
   Widget build(BuildContext context) {
     return Center(
       child: Column(
         children: [
+          Container(
+            padding: EdgeInsets.symmetric(vertical: 40.0),
+            child: Text(
+              "SELECT SPACESHIP",
+              style: const TextStyle(
+                fontFamily: 'Futura',
+                fontWeight: FontWeight.w700,
+                fontSize: 14.0,
+              ),
+            ),
+          ),
           Expanded(
             child: Container(
-              height: 400.0,
+              height: 600.0,
               child: CarouselSlider(
                 options: CarouselOptions(
                   height: 400.0,

@@ -1,16 +1,19 @@
+import 'package:equatable/equatable.dart';
 import 'package:flutter/foundation.dart';
-import 'package:hack2020/models/planet_position.dart';
 
-class Planet {
+class Planet extends Equatable {
   final String name;
-  final String modelPath;
-  final PlanetPosition positon;
-  final double radius;
+  final String imagePath;
+  final String distanceKilometers;
+
+  ///Space separated thousands
 
   Planet({
     @required this.name,
-    @required this.modelPath,
-    @required this.radius,
-    @required this.positon,
+    @required this.imagePath,
+    @required this.distanceKilometers,
   });
+
+  @override
+  List<Object> get props => [name, distanceKilometers];
 }

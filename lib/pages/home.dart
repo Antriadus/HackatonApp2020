@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:hack2020/widgets/animated_app_title.dart';
 import 'package:hack2020/widgets/animated_back_button.dart';
 import 'package:hack2020/widgets/animated_earth.dart';
+import 'package:hack2020/widgets/animeted_planets_carousel.dart';
 import 'package:hack2020/widgets/fab.dart';
 import 'package:rxdart/subjects.dart';
 
@@ -12,7 +13,7 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   BehaviorSubject<bool> arePlanetsShownSubject =
-      BehaviorSubject<bool>.seeded(false);
+      BehaviorSubject<bool>.seeded(true);
 
   @override
   void dispose() {
@@ -22,6 +23,7 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.black,
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
       floatingActionButton: BottomFab(
         onPressed: () => arePlanetsShownSubject.add(true),
@@ -40,6 +42,8 @@ class _HomePageState extends State<HomePage> {
                 child: AnimatedBackButtonWidget(
                   arePlanetsShownSubject: arePlanetsShownSubject,
                 )),
+            AnimatedPlanetsCarouselWidget(
+                arePlanetsShownSubject: arePlanetsShownSubject),
             AnimatedEarthWidget(arePlanetsShownSubject: arePlanetsShownSubject),
           ],
         ),

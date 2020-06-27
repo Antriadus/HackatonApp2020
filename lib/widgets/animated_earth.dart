@@ -24,6 +24,7 @@ class AnimatedEarthWidget extends StatelessWidget {
                     duration: Duration(seconds: 2),
                     child: Image.asset(
                       "assets/earth.jpg",
+                      fit: BoxFit.fitHeight,
                       height: 600,
                       width: MediaQuery.of(context).size.width,
                     ));

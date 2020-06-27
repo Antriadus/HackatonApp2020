@@ -17,6 +17,7 @@ dependencies:
   toast: ^0.1.5
   injectable: ^0.4.0+1
   get_it: ^4.0.2
+  carousel_slider: ^2.2.1
 
 dev_dependencies:
   flutter_test:

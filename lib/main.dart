@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:hack2020/solar_system_page.dart';
+import 'package:hack2020/pages/home.dart';
 
 void main() {
   runApp(MyApp());
@@ -12,7 +12,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Flutter Demo',
       theme: ThemeData.dark(),
-      home: SolarSystemPage(),
+      home: HomePage(),
     );
   }
 }

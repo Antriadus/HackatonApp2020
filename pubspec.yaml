@@ -1,8 +1,7 @@
 name: hack2020
 description: A new Flutter project.
 
-publish_to: 'none' 
-  sdk: ">=2.7.0 <3.0.0"
+sdk: ">=2.7.0 <3.0.0"
 
 dependencies:
   flutter:

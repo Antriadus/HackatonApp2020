@@ -13,8 +13,9 @@ class PlanetInitEvent extends PlanetEvent {
   @override
   Stream<PlanetState> applyAsync(PlanetBloc bloc, PlanetState state) async* {
     try {
-      // var planets = await bloc.planetService.getPlanets();
-      // yield PlanetDataReceivedState(planets);
+      final planets = await bloc.planetService.getPlanets();
+
+      yield PlanetDataReceivedState(planets);
     } catch (e) {
       print(e);
     }

@@ -1,5 +1,4 @@
 import 'package:hack2020/models/planet.dart';
-import 'package:hack2020/models/planet_position.dart';
 import 'package:hack2020/services/planet/interface.dart';
 
 class PlanetServiceInMemoryImpl implements PlanetService {
@@ -7,20 +6,22 @@ class PlanetServiceInMemoryImpl implements PlanetService {
   Future<List<Planet>> getPlanets() {
     return Future.value([
       Planet(
-          name: "Earth",
-          modelPath: null,
-          positon: PlanetPosition(x: 0, y: 0, z: 0),
-          radius: 10),
+        name: "Sun",
+        modelPath: 'assets/earth/4096_earth.jpg',
+        radius: 10,
+      ),
       Planet(
-          name: "Mars",
-          modelPath: null,
-          positon: PlanetPosition(x: 10, y: 10, z: 10),
-          radius: 7),
+          name: "Earth", modelPath: 'assets/earth/4096_earth.jpg', radius: 10),
       Planet(
-          name: "Venus",
-          modelPath: null,
-          positon: PlanetPosition(x: -25, y: 15, z: 10),
-          radius: 20)
+        name: "Mars",
+        modelPath: 'assets/earth/4096_earth.jpg',
+        radius: 7,
+      ),
+      Planet(
+        name: "Venus",
+        modelPath: 'assets/earth/4096_earth.jpg',
+        radius: 20,
+      )
     ]);
   }
 }

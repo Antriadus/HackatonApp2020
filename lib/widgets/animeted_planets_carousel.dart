@@ -1,6 +1,7 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:hack2020/models/planet.dart';
+import 'package:hack2020/widgets/planet_carousel_item.dart';
 import 'package:rxdart/rxdart.dart';
 
 class AnimatedPlanetsCarouselWidget extends StatelessWidget {
@@ -94,54 +95,71 @@ class _PlanetCarouselState extends State<PlanetCarousel> {
   @override
   Widget build(BuildContext context) {
     return Center(
-      child: CarouselSlider(
-        options: CarouselOptions(
-          height: 400.0,
-          enableInfiniteScroll: true,
-          initialPage: 1,
-          onPageChanged: (index, reason) {
-            currentItemSubject.add(index);
-          },
-          viewportFraction: MediaQuery.of(context).size.width > 800 ? 0.2 : 0.4,
-        ),
-        items: planets.map((item) {
-          return StreamBuilder<int>(
-              initialData: 1,
-              stream: currentItemSubject,
-              builder: (context, snapshot) {
-                return PlanetCarouselItem(
-                  model: item,
-                  isSelected: item == planets[snapshot.data],
-                );
-              });
-        }).toList(),
-      ),
-    );
-  }
-}
-
-class PlanetCarouselItem extends StatelessWidget {
-  final Planet model;
-  final bool isSelected;
-
-  const PlanetCarouselItem({this.model, this.isSelected});
-  @override
-  Widget build(BuildContext context) {
-    return Align(
-      alignment: Alignment.bottomCenter,
-      child: Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: AnimatedContainer(
-              duration: const Duration(milliseconds: 400),
-              height: isSelected ? 200 : 150,
-              width: isSelected ? 200 : 150,
-              color: Colors.white10,
-              child: Center(
-                child: Text(
-                  model.name,
-                  style: TextStyle(fontSize: 16.0),
+      child: Column(
+        children: [
+          Expanded(
+            child: Container(
+              height: 400.0,
+              child: CarouselSlider(
+                options: CarouselOptions(
+                  height: 400.0,
+                  enableInfiniteScroll: true,
+                  initialPage: 1,
+                  onPageChanged: (index, reason) {
+                    currentItemSubject.add(index);
+                  },
+                  viewportFraction:
+                      MediaQuery.of(context).size.width > 800 ? 0.2 : 0.4,
                 ),
-              ))),
+                items: planets.map((item) {
+                  return StreamBuilder<int>(
+                      initialData: 1,
+                      stream: currentItemSubject,
+                      builder: (context, snapshot) {
+                        return PlanetCarouselItem(
+                          model: item,
+                          isSelected: item == planets[snapshot.data],
+                        );
+                      });
+                }).toList(),
+              ),
+            ),
+          ),
+          StreamBuilder<int>(
+            stream: currentItemSubject,
+            initialData: 1,
+            builder: (context, snapshot) {
+              var currentModel = planets[snapshot.data];
+              return Container(
+                height: 50,
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Expanded(
+                      child: Padding(
+                        padding: const EdgeInsets.all(16.0),
+                        child: Text(
+                          currentModel.name.toUpperCase(),
+                          textAlign: TextAlign.right,
+                        ),
+                      ),
+                    ),
+                    Expanded(
+                      child: Padding(
+                        padding: const EdgeInsets.all(16.0),
+                        child: Text(
+                          currentModel.distanceKilometers,
+                          textAlign: TextAlign.left,
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              );
+            },
+          )
+        ],
+      ),
     );
   }
 }

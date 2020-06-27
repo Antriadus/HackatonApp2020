@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:hack2020/pages/select_spaceship.dart';
 import 'package:hack2020/widgets/animated_app_title.dart';
 import 'package:hack2020/widgets/animated_back_button.dart';
 import 'package:hack2020/widgets/animated_earth.dart';
@@ -14,7 +13,7 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   BehaviorSubject<bool> arePlanetsShownSubject =
-      BehaviorSubject<bool>.seeded(false);
+      BehaviorSubject<bool>.seeded(true);
 
   @override
   void dispose() {
@@ -30,7 +29,7 @@ class _HomePageState extends State<HomePage> {
       floatingActionButton: Container(
         height: 54,
         child: AppButton(
-          'BOOK A SEAT',
+          'START YOUR TRAVEL',
           onTap: () {
             arePlanetsShownSubject.add(true);
           },

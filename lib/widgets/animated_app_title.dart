@@ -19,16 +19,10 @@ class AnimatedAppTitleWidget extends StatelessWidget {
             width: isFullSize ? displayWidth : displayWidth * 0.6,
             height: isFullSize ? displayHeight * 0.3 : displayHeight * 0.15,
             curve: Curves.fastOutSlowIn,
-            duration: Duration(seconds: 2),
-            child: Align(
-              alignment: Alignment.bottomCenter,
-              child: Image.asset(
-                'assets/logo.png',
-                fit: BoxFit.fill,
-              ),
-
-              //  Text("SPACE\n Travel",
-              //     style: TextStyle(color: Colors.white, fontSize: 42)),
+            duration: Duration(seconds: 1),
+            child: Image.asset(
+              'assets/logo.png',
+              fit: BoxFit.contain,
             ),
           );
         });

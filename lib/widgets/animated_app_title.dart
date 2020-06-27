@@ -14,17 +14,16 @@ class AnimatedAppTitleWidget extends StatelessWidget {
     return StreamBuilder<bool>(
         stream: arePlanetsShownSubject,
         builder: (context, snapshot) {
-          var isFullSize = snapshot?.data ?? true;
+          var isFullSize = !(snapshot?.data ?? false);
           return AnimatedContainer(
             width: isFullSize ? displayWidth : displayWidth * 0.6,
-            height: isFullSize ? displayHeight * 0.2 : displayHeight * 0.1,
-            color: Colors.red.shade200,
+            height: isFullSize ? displayHeight * 0.3 : displayHeight * 0.15,
             curve: Curves.fastOutSlowIn,
-            duration: Duration(seconds: 5),
+            duration: Duration(seconds: 2),
             child: Align(
               alignment: Alignment.bottomCenter,
-              child:
-                  Text("SPACE Travel", style: TextStyle(color: Colors.black)),
+              child: Text("SPACE\n Travel",
+                  style: TextStyle(color: Colors.white, fontSize: 42)),
             ),
           );
         });

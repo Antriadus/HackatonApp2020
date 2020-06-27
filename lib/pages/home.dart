@@ -25,19 +25,6 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Colors.black,
-        actions: [
-          MaterialButton(
-            child: Text("GO TO SPACESHIPS"),
-            onPressed: () => Navigator.of(context).push(MaterialPageRoute(
-              builder: (context) {
-                return SelectSpaceship();
-              },
-            )),
-          )
-        ],
-      ),
       backgroundColor: Colors.black,
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
       floatingActionButton: Container(

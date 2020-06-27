@@ -22,8 +22,13 @@ class AnimatedAppTitleWidget extends StatelessWidget {
             duration: Duration(seconds: 2),
             child: Align(
               alignment: Alignment.bottomCenter,
-              child: Text("SPACE\n Travel",
-                  style: TextStyle(color: Colors.white, fontSize: 42)),
+              child: Image.asset(
+                'assets/logo.png',
+                fit: BoxFit.fill,
+              ),
+
+              //  Text("SPACE\n Travel",
+              //     style: TextStyle(color: Colors.white, fontSize: 42)),
             ),
           );
         });

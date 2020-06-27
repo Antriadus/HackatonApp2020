@@ -25,7 +25,6 @@ class _SelectSpaceshipState extends State<SelectSpaceship>
     super.initState();
     animationController =
         AnimationController(duration: const Duration(seconds: 1), vsync: this);
-
     animation = Tween<double>(begin: 0, end: 300).animate(animationController)
       ..addListener(() {
         setState(() {});

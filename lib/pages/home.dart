@@ -9,6 +9,7 @@ import 'package:hack2020/widgets/app_button.dart';
 import 'package:rxdart/subjects.dart';
 
 import 'book_seat.dart';
+import 'checkout.dart';
 
 enum EarthStates { full, half, hiden }
 enum FabStates { pinkOnly, both, none }
@@ -165,18 +166,10 @@ class _HomePageState extends State<HomePage> {
           image: 'assets/spaceships/1.png',
           seatsCount: 28),
     );
-
-    Center(
-      child: Container(
-        child: Text("HERE SHOULD BE CHOOSE SEATS PAGE"),
-      ),
-    );
   }
 
   Widget buildCheckoutPage() {
-    return Center(
-      child: Text("HERE SHOULD BE CHECKOUT PAGE"),
-    );
+    return SingleChildScrollView(child: Checkout());
   }
 
   Widget buildThankYouPage() {

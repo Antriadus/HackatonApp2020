@@ -16,12 +16,12 @@ class _YourTicketsState extends State<YourTickets> {
   }
 
   Widget _buildTicketsList() {
-    return Container(
-      width: 343,
-      child: ListView.builder(
-        shrinkWrap: true,
-        itemCount: 1,
-        itemBuilder: (context, index) => _buildTicketTile(),
+    return ListView.builder(
+      shrinkWrap: true,
+      itemCount: 2,
+      itemBuilder: (context, index) => Padding(
+        padding: EdgeInsets.symmetric(horizontal: 16.0),
+        child: _buildTicketTile(),
       ),
     );
   }

@@ -6,21 +6,21 @@ class SpaceshipServiceInMemoryImpl implements SpaceshipService {
   Future<List<Spaceship>> getSpaceships() {
     return Future.value([
       Spaceship(
-        name: 'Spaceship name',
+        name: 'Retro Starship',
         description: 'Description',
         price: 34.99,
         info: 'This spaceship is ...',
         image: 'assets/spaceships/1.png',
       ),
       Spaceship(
-        name: 'Spaceship name',
+        name: 'Intergalactic Tiger',
         description: 'Description',
         price: 34.99,
         info: 'This spaceship is ...',
         image: 'assets/spaceships/2.png',
       ),
       Spaceship(
-        name: 'Spaceship name',
+        name: 'Instans Barrel',
         description: 'Description',
         price: 34.99,
         info: 'This spaceship is ...',

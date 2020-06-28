@@ -1,1 +1,12 @@
-trzeba zbadać możliwości pluginu do 3D
+
+-deployment na weba
+-podpięcie wszystkiego na stronie hackatonu(opis, zdjęcia, filmik itd)
+-sprawdzenie responsywności na webie(Szymon coś mówił, żeby ustalić stałe ratio np 16:9, ale ja nie wiem jak to zrobić)
+-efekt rozmycia na karuzeli planet(rozmycie na bokach)
+-karuzela spaceshipów: 
+    +zmienić elementu statku: dodać ikonko i informacje jak możliwosc hibernacji itd. patrz adobe xd
+    +strzałki z bokach karuzeli:lewo, prawo
+
+- zmienić curves w animacjach na lepsze np na karuzelach, chowanie przycisku w appbarze, wsuwanie ziemi itd itp
+- zrobić jakieś przechowywanie biletów( Hive i adaptery?)
+- animacja, zę pojazd lewituje jest zamało widoczna( trzeba ją jakoś zwiększyć, żeby bardziej opadało i rosło)

@@ -170,8 +170,11 @@ class _HomePageState extends State<HomePage> {
   }
 
   Widget buildPlanetsPage() {
-    return PlanetCarousel(
-      planetSubject: selectedPlanetSubject,
+    return Padding(
+      padding: const EdgeInsets.only(bottom: 64.0),
+      child: PlanetCarousel(
+        planetSubject: selectedPlanetSubject,
+      ),
     );
   }
 

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:hack2020/pages/select_spaceship.dart';
 import 'package:hack2020/widgets/animated_app_title.dart';
 import 'package:hack2020/widgets/animated_earth.dart';
+import 'package:hack2020/widgets/planets_carousel.dart';
 import 'package:hack2020/widgets/app_back_button.dart';
 import 'package:hack2020/widgets/app_button.dart';
 import 'package:rxdart/subjects.dart';
@@ -91,18 +92,27 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.black,
+      // backgroundColor: Colors.black,
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
       floatingActionButton: buildFab(),
       body: SafeArea(
         child: Stack(
+          overflow: Overflow.visible,
           children: [
             AnimatedEarthWidget(earthSubject: earthStateSubject),
             Align(
               alignment: Alignment.topCenter,
               child: AnimatedAppTitleWidget(pageSubject: pageSubject),
             ),
-            Align(alignment: Alignment.center, child: buildPageView()),
+            Align(
+                alignment: Alignment.center,
+                child: Padding(
+                  padding: const EdgeInsets.only(top: 42.0),
+                  child: Container(
+                      height: MediaQuery.of(context).size.height * 0.5,
+                      width: MediaQuery.of(context).size.width,
+                      child: buildPageView()),
+                )),
             Align(alignment: Alignment.topLeft, child: buildBackButton()),
           ],
         ),
@@ -110,7 +120,7 @@ class _HomePageState extends State<HomePage> {
     );
   }
 
-  PageView buildPageView() {
+  Widget buildPageView() {
     var pages = {
       0: buildHomePage(),
       1: buildPlanetsPage(),
@@ -135,11 +145,7 @@ class _HomePageState extends State<HomePage> {
   }
 
   Widget buildPlanetsPage() {
-    return Center(
-      child: Text("HERE SHOULD BE CHOOSE PLANET PAGE"),
-    );
-    // return AnimatedPlanetsCarouselWidget(
-    //     arePlanetsShownSubject: arePlanetsShownSubject);
+    return PlanetCarousel();
   }
 
   Widget buildSpaceshipsPage() {

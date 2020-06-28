@@ -6,8 +6,6 @@ import '../services/spaceship/in_memory_impl.dart';
 import '../services/spaceship/interface.dart';
 
 class SelectSpaceship extends StatefulWidget {
-  SelectSpaceship({Key key}) : super(key: key);
-
   @override
   _SelectSpaceshipState createState() => _SelectSpaceshipState();
 }
@@ -40,62 +38,29 @@ class _SelectSpaceshipState extends State<SelectSpaceship>
 
   @override
   Widget build(BuildContext context) {
-    return _buildCarousel();
-  }
-
-  Widget _buildHeader() {
-    return Container(
-      padding: EdgeInsets.symmetric(vertical: 40.0),
-      child: Text(
-        "SELECT SPACESHIP",
-        style: const TextStyle(
-          fontFamily: 'Futura',
-          fontWeight: FontWeight.w700,
-          fontSize: 14.0,
-        ),
-      ),
-    );
-  }
-
-  Widget _buildCarousel() {
     return StreamBuilder(
-      stream: spaceshipService.getSpaceships().asStream(),
-      builder: (BuildContext context, AsyncSnapshot<List<Spaceship>> state) {
-        if (state.hasData) {
-          return Transform.scale(
-              scale: 1.2,
-              child: CarouselSlider(
-                items: state.data.map(buildSpaceshipTile).toList(),
-                options: CarouselOptions(
-                  height: 400.0,
-                  aspectRatio: 1.25,
-                  enlargeCenterPage: true,
-                  viewportFraction: 0.63,
-                ),
-              ));
-        } else {
-          return Center(
-            child: CircularProgressIndicator(),
-          );
-        }
-      },
-    );
+        stream: spaceshipService.getSpaceships().asStream(),
+        builder: (BuildContext context, AsyncSnapshot<List<Spaceship>> state) {
+          if (state.hasData) {
+            return Transform.scale(
+                scale: 1.0,
+                child: CarouselSlider(
+                  items: state.data.map(buildSpaceshipTile).toList(),
+                  options: CarouselOptions(
+                    height: 400.0,
+                    aspectRatio: 1.25,
+                    enlargeCenterPage: true,
+                    // viewportFraction: 0.63,
+                    viewportFraction: 0.9,
+                  ),
+                ));
+          } else {
+            return Center(
+              child: CircularProgressIndicator(),
+            );
+          }
+        });
   }
-
-  // Widget _buildAppBar() {
-  //   return Container(
-  //     child: Row(
-  //       mainAxisAlignment: MainAxisAlignment.spaceBetween,
-  //       children: <Widget>[
-  //         AppBackButton(
-  //           onPressed: () => Navigator.of(context).pop(),
-  //         ),
-  //         Image.asset('assets/logo.png'),
-  //         const SizedBox(width: 66.0)
-  //       ],
-  //     ),
-  //   );
-  // }
 
   Widget buildSpaceshipTile(Spaceship spaceship) {
     return Container(

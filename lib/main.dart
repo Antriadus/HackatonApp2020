@@ -1,15 +1,23 @@
 import 'package:flutter/material.dart';
 import 'package:hack2020/pages/home.dart';
+import 'package:hack2020/utils/screen_size.dart';
 
 void main() {
   runApp(MyApp());
 }
 
 class MyApp extends StatelessWidget {
-  // This widget is the root of your application.
+  void _setScreenSize(BuildContext context) {
+    ScreenSize _screenSize = ScreenSize();
+    _screenSize.setSize = MediaQuery.of(context).size;
+    _screenSize.setPadding = MediaQuery.of(context).padding;
+  }
+
   @override
   Widget build(BuildContext context) {
+    //_setScreenSize(context);
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       title: 'Flutter Demo',
       theme: ThemeData.dark()
           .copyWith(scaffoldBackgroundColor: const Color(0XFF1A222D)),

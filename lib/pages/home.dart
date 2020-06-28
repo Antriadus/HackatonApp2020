@@ -26,7 +26,8 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.black,
+        backgroundColor: Colors.transparent,
+        elevation: 0.0,
         actions: [
           MaterialButton(
             child: Text("GO TO SPACESHIPS"),
@@ -38,7 +39,6 @@ class _HomePageState extends State<HomePage> {
           )
         ],
       ),
-      backgroundColor: Colors.black,
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
       floatingActionButton: Container(
         height: 54,
@@ -49,24 +49,22 @@ class _HomePageState extends State<HomePage> {
           },
         ),
       ),
-      body: SafeArea(
-        child: Stack(
-          children: [
-            Align(
-              alignment: Alignment.topCenter,
-              child: AnimatedAppTitleWidget(
-                  arePlanetsShownSubject: arePlanetsShownSubject),
-            ),
-            Align(
-                alignment: Alignment.topLeft,
-                child: AnimatedBackButtonWidget(
-                  arePlanetsShownSubject: arePlanetsShownSubject,
-                )),
-            AnimatedPlanetsCarouselWidget(
+      body: Stack(
+        children: [
+          Align(
+            alignment: Alignment.topCenter,
+            child: AnimatedAppTitleWidget(
                 arePlanetsShownSubject: arePlanetsShownSubject),
-            AnimatedEarthWidget(arePlanetsShownSubject: arePlanetsShownSubject),
-          ],
-        ),
+          ),
+          Align(
+              alignment: Alignment.topLeft,
+              child: AnimatedBackButtonWidget(
+                arePlanetsShownSubject: arePlanetsShownSubject,
+              )),
+          AnimatedPlanetsCarouselWidget(
+              arePlanetsShownSubject: arePlanetsShownSubject),
+          AnimatedEarthWidget(arePlanetsShownSubject: arePlanetsShownSubject),
+        ],
       ),
     );
   }

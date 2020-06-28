@@ -23,7 +23,7 @@ class AnimatedEarthWidget extends StatelessWidget {
                     curve: Curves.fastOutSlowIn,
                     duration: Duration(seconds: 2),
                     child: Image.asset(
-                      "assets/earth.jpg",
+                      "assets/earth.png",
                       fit: BoxFit.fitHeight,
                       height: 600,
                       width: MediaQuery.of(context).size.width,

@@ -197,12 +197,13 @@ class _HomePageState extends State<HomePage> {
           4: "PAY WITH CHIPSET",
           5: "SEE TICKET"
         };
+        var buttonHeight = 72.0;
         return StreamBuilder<FabStates>(
             stream: fabStateSubject,
             builder: (_, fabSubject) {
               if (fabSubject.data == FabStates.pinkOnly) {
                 return Container(
-                  height: 54,
+                  height: buttonHeight,
                   child: AppButton(
                     titles[snapshot.data] ?? "",
                     onTap: () {
@@ -213,7 +214,7 @@ class _HomePageState extends State<HomePage> {
                 );
               } else if (fabSubject.data == FabStates.both) {
                 return Container(
-                  height: (54 * 2) + 10.0,
+                  height: (buttonHeight * 2) + 10.0,
                   child: Column(
                     children: [
                       AppButton(
@@ -224,7 +225,7 @@ class _HomePageState extends State<HomePage> {
                         },
                       ),
                       Container(
-                        height: 10,
+                        height: 6,
                       ),
                       AppButton(
                         "RETURN HOME",

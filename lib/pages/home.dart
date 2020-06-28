@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:hack2020/models/spaceship.dart';
 import 'package:hack2020/pages/select_spaceship.dart';
 import 'package:hack2020/widgets/animated_app_title.dart';
 import 'package:hack2020/widgets/animated_earth.dart';
@@ -6,6 +7,8 @@ import 'package:hack2020/widgets/planets_carousel.dart';
 import 'package:hack2020/widgets/app_back_button.dart';
 import 'package:hack2020/widgets/app_button.dart';
 import 'package:rxdart/subjects.dart';
+
+import 'book_seat.dart';
 
 enum EarthStates { full, half, hiden }
 enum FabStates { pinkOnly, both, none }
@@ -153,7 +156,17 @@ class _HomePageState extends State<HomePage> {
   }
 
   Widget buildSeatsPage() {
-    return Center(
+    return BookSeat(
+      spaceship: Spaceship(
+          name: 'Spaceship name',
+          description: 'Description',
+          price: 34.99,
+          info: 'This spaceship is ...',
+          image: 'assets/spaceships/1.png',
+          seatsCount: 28),
+    );
+
+    Center(
       child: Container(
         child: Text("HERE SHOULD BE CHOOSE SEATS PAGE"),
       ),

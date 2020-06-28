@@ -1,12 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:hack2020/enums/spaceship_type.dart';
 import '../models/spaceship.dart';
-import '../widgets/app_back_button.dart';
-import '../widgets/app_button.dart';
 
 class BookSeat extends StatefulWidget {
   final Spaceship spaceship;
-  const BookSeat({Key key, @required this.spaceship}) : super(key: key);
+  const BookSeat({@required this.spaceship});
 
   @override
   _BookSeatState createState() => _BookSeatState();
@@ -94,31 +92,9 @@ class _BookSeatState extends State<BookSeat> {
     setState(() {});
   }
 
-  void _handleAppButtonTap() {
-    if (selectedSeatsList.isNotEmpty) {}
-  }
-
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: SafeArea(
-          child: Column(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: <Widget>[
-          _buildAppBar(),
-          _buildHeader(),
-          _buildSeats(),
-          _buildAppButton()
-        ],
-      )),
-    );
-  }
-
-  Widget _buildHeader() {
-    return Container(
-      padding: EdgeInsets.symmetric(vertical: 40.0),
-      child: Text("BOOK SEAT", style: defaultTextStyle),
-    );
+    return _buildSeats();
   }
 
   Widget _buildSeats() {
@@ -126,9 +102,10 @@ class _BookSeatState extends State<BookSeat> {
       child: Container(
         alignment: Alignment.center,
         padding: EdgeInsets.only(
-            left: MediaQuery.of(context).size.width * 0.04,
-            right: MediaQuery.of(context).size.width * 0.04,
-            bottom: MediaQuery.of(context).size.height * 0.1),
+          left: MediaQuery.of(context).size.width * 0.04,
+          right: MediaQuery.of(context).size.width * 0.04,
+          // bottom: MediaQuery.of(context).size.height * 0.1,
+        ),
         child: GridView.count(
           crossAxisCount: 6,
           childAspectRatio: 1,
@@ -175,24 +152,4 @@ class _BookSeatState extends State<BookSeat> {
           )
         : Container();
   }
-
-  Widget _buildAppBar() {
-    return Container(
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: <Widget>[
-          AppBackButton(
-            onPressed: () => Navigator.of(context).pop(),
-          ),
-          Image.asset('assets/logo.png'),
-          const SizedBox(width: 66.0)
-        ],
-      ),
-    );
-  }
-
-  Widget _buildAppButton() => AppButton(
-        '${selectedSeatsList.length} SEATS - CHECKOUT',
-        onTap: () => _handleAppButtonTap,
-      );
 }

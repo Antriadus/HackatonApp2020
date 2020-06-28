@@ -19,6 +19,11 @@ class AppBackButton extends StatelessWidget {
                 blurRadius: 15,
                 offset: Offset(-5, -5),
               ),
+              BoxShadow(
+                color: Colors.black.withOpacity(0.45),
+                blurRadius: 16,
+                offset: Offset(8, 8),
+              ),
             ],
             gradient: LinearGradient(
               colors: [

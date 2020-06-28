@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:hack2020/pages/home.dart';
 import 'package:hack2020/utils/screen_size.dart';
@@ -19,8 +20,11 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Flutter Demo',
-      theme: ThemeData.dark()
-          .copyWith(scaffoldBackgroundColor: const Color(0XFF1A222D)),
+      theme: ThemeData.dark().copyWith(
+        scaffoldBackgroundColor: kIsWeb
+            ? const Color.fromARGB(255, 27, 38, 51)
+            : const Color(0XFF1A222D),
+      ),
       // home: SelectSpaceship(),
       home: HomePage(),
     );

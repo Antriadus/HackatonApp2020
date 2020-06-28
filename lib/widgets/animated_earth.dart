@@ -36,13 +36,14 @@ class _AnimatedEarthWidgetState extends State<AnimatedEarthWidget> {
               builder: (context, snapshot) {
                 var isOnBottom = snapshot?.data ?? false;
                 return AnimatedPositioned(
-                    top: isOnBottom ? displayHeight * 0.7 : displayHeight * 0.4,
+                    top: isOnBottom ? displayHeight * 0.9 : displayHeight * 0.7,
                     curve: Curves.fastOutSlowIn,
                     duration: Duration(seconds: 2),
                     child: Container(
-                        height: 600,
+                        height: 500,
                         width: MediaQuery.of(context).size.width,
-                        child: VideoPlayer(_controller)));
+                        child: Transform.scale(
+                            scale: 2, child: VideoPlayer(_controller))));
               });
         });
   }

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:hack2020/models/planet.dart';
 import 'package:hack2020/models/spaceship.dart';
 import 'package:hack2020/pages/select_spaceship.dart';
+import 'package:hack2020/pages/thank_you.dart';
 import 'package:hack2020/pages/your_tickets.dart';
 import 'package:hack2020/widgets/animated_app_title.dart';
 import 'package:hack2020/widgets/animated_earth.dart';
@@ -94,7 +95,7 @@ class _HomePageState extends State<HomePage> {
     return StreamBuilder<int>(
       stream: pageSubject,
       builder: (context, snapshot) {
-        var isVisble = snapshot.data != 0;
+        var isVisble = snapshot.data != 0 && snapshot.data != 5;
         return AnimatedOpacity(
             //TODO rework animation duration and curve cause it is too slow now
             duration: Duration(seconds: 1),
@@ -197,9 +198,7 @@ class _HomePageState extends State<HomePage> {
   }
 
   Widget buildThankYouPage() {
-    return Center(
-      child: Text("HERE SHOULD BE THANK YOU PAGE"),
-    );
+    return SingleChildScrollView(child: ThankYou());
   }
 
   Widget buildTicketsPage() {
@@ -273,7 +272,9 @@ class _HomePageState extends State<HomePage> {
                       ),
                       AppButton(
                         "RETURN HOME",
+                        appButtonColor: AppButtonColor.Mono,
                         onTap: () {
+                          selectedSeatsSubject.add([]);
                           animateToPage(0);
                           pageSubject.add(0);
                         },

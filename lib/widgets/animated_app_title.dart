@@ -22,22 +22,28 @@ class AnimatedAppTitleWidget extends StatelessWidget {
             3: "BOOK SEAT",
             4: "CHECK OUT",
             5: "",
-            6: "",
+            6: "YOUR TICKETS",
             7: "",
             8: "",
           };
           return Column(
             children: [
-              AnimatedContainer(
-                width: isFullSize ? displayWidth : displayWidth * 0.6,
-                height: isFullSize ? displayHeight * 0.3 : displayHeight * 0.15,
-                curve: Curves.fastOutSlowIn,
-                duration: Duration(seconds: 1),
-                child: Image.asset(
-                  'assets/logo.png',
-                  fit: BoxFit.contain,
+              if (snapshot.data == 5)
+                Container(
+                    width: double.infinity,
+                    child: Image.asset('assets/thank_you.png')),
+              if (snapshot.data != 5)
+                AnimatedContainer(
+                  width: isFullSize ? displayWidth : displayWidth * 0.6,
+                  height:
+                      isFullSize ? displayHeight * 0.3 : displayHeight * 0.15,
+                  curve: Curves.fastOutSlowIn,
+                  duration: Duration(seconds: 1),
+                  child: Image.asset(
+                    'assets/logo.png',
+                    fit: BoxFit.contain,
+                  ),
                 ),
-              ),
               Container(
                 height: 24,
               ),

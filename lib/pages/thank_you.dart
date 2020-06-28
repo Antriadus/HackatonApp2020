@@ -1,12 +1,8 @@
 import 'package:flutter/material.dart';
 
 import '../widgets/app_back_button.dart';
-import '../widgets/app_button.dart';
-import 'your_tickets.dart';
 
 class ThankYou extends StatefulWidget {
-  ThankYou({Key key}) : super(key: key);
-
   @override
   _ThankYouState createState() => _ThankYouState();
 }
@@ -14,17 +10,7 @@ class ThankYou extends StatefulWidget {
 class _ThankYouState extends State<ThankYou> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: SafeArea(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: <Widget>[
-            _buildHeader(),
-            _buildSpaceship(),
-          ],
-        ),
-      ),
-    );
+    return _buildSpaceship();
   }
 
   Widget _buildSpaceship() {

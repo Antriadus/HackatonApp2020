@@ -105,22 +105,19 @@ class _BookSeatState extends State<BookSeat> {
   }
 
   Widget _buildSeats() {
-    return Flexible(
-      child: Container(
-        alignment: Alignment.center,
-        padding: EdgeInsets.only(
-          left: MediaQuery.of(context).size.width * 0.04,
-          right: MediaQuery.of(context).size.width * 0.04,
-          // bottom: MediaQuery.of(context).size.height * 0.1,
-        ),
-        child: GridView.count(
-          crossAxisCount: 6,
-          childAspectRatio: 1,
-          crossAxisSpacing: 10,
-          mainAxisSpacing: 10,
-          children:
-              seatsList.map((seatInt) => _buildSeatTile(seatInt)).toList(),
-        ),
+    return Container(
+      alignment: Alignment.center,
+      padding: EdgeInsets.only(
+        left: MediaQuery.of(context).size.width * 0.04,
+        right: MediaQuery.of(context).size.width * 0.04,
+        // bottom: MediaQuery.of(context).size.height * 0.1,
+      ),
+      child: GridView.count(
+        crossAxisCount: 6,
+        childAspectRatio: 1,
+        crossAxisSpacing: 10,
+        mainAxisSpacing: 10,
+        children: seatsList.map((seatInt) => _buildSeatTile(seatInt)).toList(),
       ),
     );
   }

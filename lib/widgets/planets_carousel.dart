@@ -117,39 +117,18 @@ class CurrentPlanetDistance extends StatelessWidget {
       builder: (context, snapshot) {
         var currentModel = planets[snapshot.data];
         return Container(
-          height: 50,
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Expanded(
-                child: Padding(
-                  padding: const EdgeInsets.all(16.0),
-                  child: Text(
-                    currentModel.name.toUpperCase(),
-                    textAlign: TextAlign.right,
-                    style: const TextStyle(
-                      fontFamily: 'Futura',
-                      fontWeight: FontWeight.w700,
-                      fontSize: 14.0,
-                    ),
-                  ),
-                ),
+          height: 60,
+          child: Padding(
+            padding: const EdgeInsets.all(16.0),
+            child: Text(
+              "${currentModel.name.toUpperCase()}\n${currentModel.distanceKilometers} KM",
+              textAlign: TextAlign.center,
+              style: const TextStyle(
+                fontFamily: 'Futura',
+                fontWeight: FontWeight.w700,
+                fontSize: 14.0,
               ),
-              Expanded(
-                child: Padding(
-                  padding: const EdgeInsets.all(16.0),
-                  child: Text(
-                    "${currentModel.distanceKilometers} KM",
-                    textAlign: TextAlign.left,
-                    style: const TextStyle(
-                      fontFamily: 'Futura',
-                      fontWeight: FontWeight.w700,
-                      fontSize: 14.0,
-                    ),
-                  ),
-                ),
-              ),
-            ],
+            ),
           ),
         );
       },

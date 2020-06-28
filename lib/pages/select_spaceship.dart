@@ -57,7 +57,6 @@ class _SelectSpaceshipState extends State<SelectSpaceship>
                     height: 400.0,
                     aspectRatio: 1.25,
                     enlargeCenterPage: true,
-                    // viewportFraction: 0.63,
                     viewportFraction: 0.9,
                   ),
                 ));

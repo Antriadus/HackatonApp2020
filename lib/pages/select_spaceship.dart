@@ -6,6 +6,7 @@ import '../services/spaceship/in_memory_impl.dart';
 import '../services/spaceship/interface.dart';
 import '../widgets/app_back_button.dart';
 import '../widgets/app_button.dart';
+import 'checkout.dart';
 
 class SelectSpaceship extends StatefulWidget {
   SelectSpaceship({Key key}) : super(key: key);
@@ -50,7 +51,11 @@ class _SelectSpaceshipState extends State<SelectSpaceship>
           ),
           AppButton(
             'BOOK A SEAT',
-            onTap: () {},
+            onTap: () => Navigator.of(context).push(
+              MaterialPageRoute(
+                builder: (context) => Checkout(),
+              ),
+            ),
           )
         ],
       )),

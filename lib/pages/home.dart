@@ -35,24 +35,22 @@ class _HomePageState extends State<HomePage> {
           },
         ),
       ),
-      body: SafeArea(
-        child: Stack(
-          children: [
-            Align(
-              alignment: Alignment.topCenter,
-              child: AnimatedAppTitleWidget(
-                  arePlanetsShownSubject: arePlanetsShownSubject),
-            ),
-            Align(
-                alignment: Alignment.topLeft,
-                child: AnimatedBackButtonWidget(
-                  arePlanetsShownSubject: arePlanetsShownSubject,
-                )),
-            AnimatedPlanetsCarouselWidget(
+      body: Stack(
+        children: [
+          Align(
+            alignment: Alignment.topCenter,
+            child: AnimatedAppTitleWidget(
                 arePlanetsShownSubject: arePlanetsShownSubject),
-            AnimatedEarthWidget(arePlanetsShownSubject: arePlanetsShownSubject),
-          ],
-        ),
+          ),
+          Align(
+              alignment: Alignment.topLeft,
+              child: AnimatedBackButtonWidget(
+                arePlanetsShownSubject: arePlanetsShownSubject,
+              )),
+          AnimatedPlanetsCarouselWidget(
+              arePlanetsShownSubject: arePlanetsShownSubject),
+          AnimatedEarthWidget(arePlanetsShownSubject: arePlanetsShownSubject),
+        ],
       ),
     );
   }

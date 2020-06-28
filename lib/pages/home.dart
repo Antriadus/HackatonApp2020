@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:hack2020/models/planet.dart';
 import 'package:hack2020/models/spaceship.dart';
 import 'package:hack2020/pages/select_spaceship.dart';
 import 'package:hack2020/widgets/animated_app_title.dart';
@@ -26,6 +27,22 @@ class _HomePageState extends State<HomePage> {
       BehaviorSubject<EarthStates>.seeded(EarthStates.full);
 
   final fabStateSubject = BehaviorSubject<FabStates>.seeded(FabStates.pinkOnly);
+  final selectedSeatsSubject = BehaviorSubject<List<int>>.seeded([]);
+  final selectedSpaceshipSubject = BehaviorSubject<Spaceship>.seeded(Spaceship(
+      name: 'Spaceship name',
+      description: 'Description',
+      price: 34.99,
+      info: 'This spaceship is ...',
+      image: 'assets/spaceships/1.png',
+      seatsCount: 24));
+
+  final selectedPlanetSubject = BehaviorSubject<Planet>.seeded(
+    Planet(
+      distanceKilometers: "123 222 332 041",
+      imagePath: "assets/planets/moon.png",
+      name: "Moon",
+    ),
+  );
 
   final controller = PageController();
 
@@ -63,9 +80,12 @@ class _HomePageState extends State<HomePage> {
 
   @override
   void dispose() {
+    selectedPlanetSubject.close();
     earthStateSubject.close();
     pageSubject.close();
     fabStateSubject.close();
+    selectedSeatsSubject.close();
+    selectedSpaceshipSubject.close();
     super.dispose();
   }
 
@@ -149,27 +169,31 @@ class _HomePageState extends State<HomePage> {
   }
 
   Widget buildPlanetsPage() {
-    return PlanetCarousel();
+    return PlanetCarousel(
+      planetSubject: selectedPlanetSubject,
+    );
   }
 
   Widget buildSpaceshipsPage() {
-    return SelectSpaceship();
+    return SelectSpaceship(
+      spaceshipSubject: selectedSpaceshipSubject,
+    );
   }
 
   Widget buildSeatsPage() {
     return BookSeat(
-      spaceship: Spaceship(
-          name: 'Spaceship name',
-          description: 'Description',
-          price: 34.99,
-          info: 'This spaceship is ...',
-          image: 'assets/spaceships/1.png',
-          seatsCount: 28),
+      selectedSeatsSubject: selectedSeatsSubject,
+      spaceship: selectedSpaceshipSubject.value,
     );
   }
 
   Widget buildCheckoutPage() {
-    return SingleChildScrollView(child: Checkout());
+    return SingleChildScrollView(
+        child: Checkout(
+      selectedSeatsSubject: selectedSeatsSubject,
+      spaceshipSubject: selectedSpaceshipSubject,
+      planetSubject: selectedPlanetSubject,
+    ));
   }
 
   Widget buildThankYouPage() {
@@ -208,6 +232,22 @@ class _HomePageState extends State<HomePage> {
             stream: fabStateSubject,
             builder: (_, fabSubject) {
               if (fabSubject.data == FabStates.pinkOnly) {
+                if (snapshot.data == 3) {
+                  return StreamBuilder<List<int>>(
+                      initialData: [],
+                      stream: selectedSeatsSubject,
+                      builder: (context, seatsSnapshot) {
+                        return Container(
+                            height: buttonHeight,
+                            child: AppButton(
+                              "${seatsSnapshot.data.length} SEATS- CHECK OUT",
+                              onTap: () {
+                                animateToPage(snapshot.data + 1);
+                                pageSubject.add(snapshot.data + 1);
+                              },
+                            ));
+                      });
+                }
                 return Container(
                   height: buttonHeight,
                   child: AppButton(

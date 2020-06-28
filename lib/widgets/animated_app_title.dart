@@ -15,18 +15,17 @@ class AnimatedAppTitleWidget extends StatelessWidget {
         stream: pageSubject,
         builder: (context, snapshot) {
           var isFullSize = snapshot.data == 0;
-          var titles = [
-            "",
-            "SELECT YOUR DESTINATION",
-            "SELECT SPACESHIP",
-            "BOOK SEAT",
-            "CHECK OUT",
-            "",
-            "",
-            "",
-            "",
-            "",
-          ];
+          var titles = {
+            0: "",
+            1: "SELECT YOUR DESTINATION",
+            2: "SELECT SPACESHIP",
+            3: "BOOK SEAT",
+            4: "CHECK OUT",
+            5: "",
+            6: "",
+            7: "",
+            8: "",
+          };
           return Column(
             children: [
               AnimatedContainer(
@@ -43,7 +42,7 @@ class AnimatedAppTitleWidget extends StatelessWidget {
                 height: 24,
               ),
               Text(
-                titles[snapshot.data],
+                titles[snapshot.data] ?? "",
                 style: const TextStyle(
                   fontFamily: 'Futura',
                   fontWeight: FontWeight.w700,

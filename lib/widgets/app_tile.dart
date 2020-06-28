@@ -18,18 +18,18 @@ class AppTile extends StatelessWidget {
         width: 343,
         height: 83,
         decoration: BoxDecoration(
-          boxShadow: [
-            BoxShadow(
-              color: Colors.white.withOpacity(0.08),
-              offset: Offset(-8, -10),
-              blurRadius: 35,
-            ),
-            BoxShadow(
-              color: Colors.black.withOpacity(0.32),
-              offset: Offset(10, 10),
-              blurRadius: 35,
-            ),
-          ],
+          // boxShadow: [
+          //   BoxShadow(
+          //     color: Colors.white.withOpacity(0.08),
+          //     offset: Offset(-8, -10),
+          //     blurRadius: 35,
+          //   ),
+          //   BoxShadow(
+          //     color: Colors.black.withOpacity(0.32),
+          //     offset: Offset(10, 10),
+          //     blurRadius: 35,
+          //   ),
+          // ],
           borderRadius: BorderRadius.all(Radius.circular(17)),
           gradient: LinearGradient(
             begin: Alignment.topLeft,

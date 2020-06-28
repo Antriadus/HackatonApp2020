@@ -1,10 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:hack2020/enums/spaceship_type.dart';
+import 'package:rxdart/rxdart.dart';
 import '../models/spaceship.dart';
 
 class BookSeat extends StatefulWidget {
+  final BehaviorSubject<List<int>> selectedSeatsSubject;
   final Spaceship spaceship;
-  const BookSeat({@required this.spaceship});
+  const BookSeat({
+    @required this.spaceship,
+    @required this.selectedSeatsSubject,
+  });
 
   @override
   _BookSeatState createState() => _BookSeatState();
@@ -31,7 +36,7 @@ class _BookSeatState extends State<BookSeat> {
     missedSeats = 0;
     seatsList = List<int>.generate(
         widget.spaceship.seatsCount, (i) => _generateSeatList(i));
-    selectedSeatsList = [];
+    selectedSeatsList = widget.selectedSeatsSubject.value;
     super.initState();
   }
 
@@ -90,6 +95,8 @@ class _BookSeatState extends State<BookSeat> {
     }
     print(selectedSeatsList);
     setState(() {});
+
+    widget.selectedSeatsSubject.add(selectedSeatsList..sort());
   }
 
   @override

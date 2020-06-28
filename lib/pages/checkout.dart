@@ -1,10 +1,21 @@
 import 'package:flutter/material.dart';
-import 'package:hack2020/pages/thank_you.dart';
+import 'package:hack2020/models/planet.dart';
+import 'package:hack2020/models/spaceship.dart';
 import 'package:hack2020/widgets/app_tile.dart';
-
-import '../widgets/app_button.dart';
+import 'package:rxdart/rxdart.dart';
 
 class Checkout extends StatelessWidget {
+  final BehaviorSubject<Planet> planetSubject;
+  final BehaviorSubject<Spaceship> spaceshipSubject;
+  final BehaviorSubject<List<int>> selectedSeatsSubject;
+
+  const Checkout({
+    Key key,
+    @required this.planetSubject,
+    @required this.spaceshipSubject,
+    @required this.selectedSeatsSubject,
+  }) : super(key: key);
+
   Widget build(BuildContext context) {
     return SafeArea(
       child: Column(
@@ -55,14 +66,18 @@ class Checkout extends StatelessWidget {
                                 fontWeight: FontWeight.w700,
                                 color: const Color(0XFFEAEAEA)),
                           ),
-                          Text(
-                            'Neptune',
-                            style: TextStyle(
-                                fontSize: 15.0,
-                                fontFamily: 'Futura',
-                                fontWeight: FontWeight.w500,
-                                color: const Color(0XFFA7B3BF)),
-                          )
+                          StreamBuilder<Planet>(
+                              stream: planetSubject,
+                              builder: (context, snapshot) {
+                                return Text(
+                                  snapshot?.data?.name ?? "",
+                                  style: TextStyle(
+                                      fontSize: 15.0,
+                                      fontFamily: 'Futura',
+                                      fontWeight: FontWeight.w500,
+                                      color: const Color(0XFFA7B3BF)),
+                                );
+                              })
                         ],
                       ),
                     ],
@@ -72,96 +87,111 @@ class Checkout extends StatelessWidget {
               AppTile(
                   child: Container(
                 margin: EdgeInsets.symmetric(horizontal: 16.0, vertical: 10),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: <Widget>[
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                      children: <Widget>[
-                        Text(
-                          'SPACESHIP',
-                          style: TextStyle(
-                              fontSize: 14.0,
-                              fontFamily: 'Futura',
-                              fontWeight: FontWeight.w700,
-                              color: const Color(0XFFEAEAEA)),
-                        ),
-                        Text(
-                          'Spaceship name',
-                          style: TextStyle(
-                              fontSize: 15.0,
-                              fontFamily: 'Futura',
-                              fontWeight: FontWeight.w500,
-                              color: const Color(0XFFA7B3BF)),
-                        )
-                      ],
-                    ),
-                    Padding(
-                      padding: EdgeInsets.only(right: 16.0),
-                      child: Transform.scale(
-                        scale: 2.6,
-                        child: Image.asset('assets/spaceships/1.png'),
-                      ),
-                    ),
-                  ],
-                ),
+                child: StreamBuilder<Spaceship>(
+                    stream: spaceshipSubject,
+                    initialData: spaceshipSubject.value,
+                    builder: (context, snapshot) {
+                      return Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: <Widget>[
+                          Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                            children: <Widget>[
+                              Text(
+                                'SPACESHIP',
+                                style: TextStyle(
+                                    fontSize: 14.0,
+                                    fontFamily: 'Futura',
+                                    fontWeight: FontWeight.w700,
+                                    color: const Color(0XFFEAEAEA)),
+                              ),
+                              Text(
+                                snapshot?.data?.name ?? "",
+                                style: TextStyle(
+                                    fontSize: 15.0,
+                                    fontFamily: 'Futura',
+                                    fontWeight: FontWeight.w500,
+                                    color: const Color(0XFFA7B3BF)),
+                              )
+                            ],
+                          ),
+                          Padding(
+                            padding: EdgeInsets.only(right: 16.0),
+                            child: Transform.scale(
+                              scale: 2.6,
+                              child: Image.asset(snapshot?.data?.image),
+                            ),
+                          ),
+                        ],
+                      );
+                    }),
               )),
               AppTile(
                 child: Container(
                   margin: EdgeInsets.symmetric(horizontal: 16.0, vertical: 10),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: <Widget>[
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                        children: <Widget>[
-                          Text(
-                            'SEATS',
-                            style: TextStyle(
-                                fontSize: 14.0,
-                                fontFamily: 'Futura',
-                                fontWeight: FontWeight.w700,
-                                color: const Color(0XFFEAEAEA)),
-                          ),
-                          Text(
-                            '1, 2, 3, 4, 5',
-                            style: TextStyle(
-                                fontSize: 15.0,
-                                fontFamily: 'Futura',
-                                fontWeight: FontWeight.w500,
-                                color: const Color(0XFFA7B3BF)),
-                          )
-                        ],
-                      ),
-                      Container(
-                        width: 20.0,
-                      ),
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                        children: <Widget>[
-                          Text(
-                            'PRICE',
-                            style: TextStyle(
-                                fontSize: 14.0,
-                                fontFamily: 'Futura',
-                                fontWeight: FontWeight.w700,
-                                color: const Color(0XFFEAEAEA)),
-                          ),
-                          Text(
-                            '1000 Moon Coins',
-                            style: TextStyle(
-                                fontSize: 15.0,
-                                fontFamily: 'Futura',
-                                fontWeight: FontWeight.w500,
-                                color: const Color(0XFFFF6A00)),
-                          )
-                        ],
-                      ),
-                    ],
-                  ),
+                  child: StreamBuilder<List<int>>(
+                      stream: selectedSeatsSubject,
+                      initialData: [],
+                      builder: (context, snapshot) {
+                        var seatNumbers = snapshot.data.join(',');
+
+                        if (seatNumbers.isNotEmpty)
+                          seatNumbers =
+                              seatNumbers.substring(0, seatNumbers.length - 1);
+                        return Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: <Widget>[
+                            Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                              children: <Widget>[
+                                Text(
+                                  'SEATS',
+                                  style: TextStyle(
+                                      fontSize: 14.0,
+                                      fontFamily: 'Futura',
+                                      fontWeight: FontWeight.w700,
+                                      color: const Color(0XFFEAEAEA)),
+                                ),
+                                Text(
+                                  seatNumbers,
+                                  style: TextStyle(
+                                      fontSize: 15.0,
+                                      fontFamily: 'Futura',
+                                      fontWeight: FontWeight.w500,
+                                      color: const Color(0XFFA7B3BF)),
+                                )
+                              ],
+                            ),
+                            Container(
+                              width: 20.0,
+                            ),
+                            Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                              children: <Widget>[
+                                Text(
+                                  'PRICE',
+                                  style: TextStyle(
+                                      fontSize: 14.0,
+                                      fontFamily: 'Futura',
+                                      fontWeight: FontWeight.w700,
+                                      color: const Color(0XFFEAEAEA)),
+                                ),
+                                Text(
+                                  '${snapshot.data.length * 1000} Moon Coins',
+                                  style: TextStyle(
+                                      fontSize: 15.0,
+                                      fontFamily: 'Futura',
+                                      fontWeight: FontWeight.w500,
+                                      color: const Color(0XFFFF6A00)),
+                                )
+                              ],
+                            ),
+                          ],
+                        );
+                      }),
                 ),
               ),
             ],

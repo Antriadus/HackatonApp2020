@@ -1,11 +1,16 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
+import 'package:rxdart/rxdart.dart';
 
 import '../models/spaceship.dart';
 import '../services/spaceship/in_memory_impl.dart';
 import '../services/spaceship/interface.dart';
 
 class SelectSpaceship extends StatefulWidget {
+  final BehaviorSubject<Spaceship> spaceshipSubject;
+
+  const SelectSpaceship({Key key, @required this.spaceshipSubject})
+      : super(key: key);
   @override
   _SelectSpaceshipState createState() => _SelectSpaceshipState();
 }
@@ -47,6 +52,8 @@ class _SelectSpaceshipState extends State<SelectSpaceship>
                 child: CarouselSlider(
                   items: state.data.map(buildSpaceshipTile).toList(),
                   options: CarouselOptions(
+                    onPageChanged: (index, _) =>
+                        widget.spaceshipSubject.add(state.data[index]),
                     height: 400.0,
                     aspectRatio: 1.25,
                     enlargeCenterPage: true,

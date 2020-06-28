@@ -4,15 +4,11 @@ import 'package:hack2020/models/planet.dart';
 import 'package:hack2020/widgets/planet_carousel_item.dart';
 import 'package:rxdart/rxdart.dart';
 
-class PlanetCarousel extends StatefulWidget {
-  @override
-  _PlanetCarouselState createState() => _PlanetCarouselState();
-}
+class PlanetCarousel extends StatelessWidget {
+  final BehaviorSubject<Planet> planetSubject;
+  final currentItemSubject = BehaviorSubject<int>.seeded(1);
 
-class _PlanetCarouselState extends State<PlanetCarousel> {
-  BehaviorSubject<int> currentItemSubject = BehaviorSubject<int>.seeded(1);
-
-  var planets = [
+  final planets = [
     Planet(
       distanceKilometers: "10 321 23",
       imagePath: "assets/planets/neptune.png",
@@ -50,6 +46,8 @@ class _PlanetCarouselState extends State<PlanetCarousel> {
     ),
   ];
 
+  PlanetCarousel({@required this.planetSubject});
+
   @override
   Widget build(BuildContext context) {
     return Center(
@@ -59,19 +57,6 @@ class _PlanetCarouselState extends State<PlanetCarousel> {
           Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              // Flexible(
-              //   child: Container(
-              //     // color: Colors.yellow,
-              //     child: Text(
-              //       "SELECT YOUR DESTINATION",
-              //       style: const TextStyle(
-              //         fontFamily: 'Futura',
-              //         fontWeight: FontWeight.w700,
-              //         fontSize: 14.0,
-              //       ),
-              //     ),
-              //   ),
-              // ),
               Container(
                 height: 180.0,
                 child: CarouselSlider(
@@ -81,7 +66,13 @@ class _PlanetCarouselState extends State<PlanetCarousel> {
                     enableInfiniteScroll: true,
                     initialPage: 1,
                     onPageChanged: (index, reason) {
-                      currentItemSubject.add(index);
+                      try {
+                        currentItemSubject.add(index);
+                        planetSubject.add(planets[index]);
+                      } catch (e) {
+                        print(e);
+                        print(e);
+                      }
                     },
                     viewportFraction: 0.4,
                   ),

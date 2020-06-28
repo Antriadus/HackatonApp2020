@@ -25,27 +25,21 @@ class _PlanetCarouselItemState extends State<PlanetCarouselItem> {
             child: ClipRRect(
                 borderRadius: BorderRadius.circular(1000),
                 child: Container(
-                  color: widget.isSelected
-                      ? Color.fromARGB(200, 53, 63, 89)
-                      : Theme.of(context).scaffoldBackgroundColor,
-                  child: Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: ClipRRect(
-                      borderRadius: BorderRadius.circular(1000),
-                      child: Container(
-                        color: Colors.blue,
+                    color: widget.isSelected
+                        ? Color.fromARGB(200, 53, 63, 89)
+                        : Theme.of(context).scaffoldBackgroundColor,
+                    child: Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: ClipRRect(
+                        borderRadius: BorderRadius.circular(1000),
+                        child: Image.asset(
+                          widget.model.imagePath,
+                          fit: BoxFit.fitHeight,
+                          height: 600,
+                          width: MediaQuery.of(context).size.width,
+                        ),
                       ),
-                    ),
-                  ),
-                )
-                //     Image.asset(
-                //   "assets/earth.jpg",
-                //   fit: BoxFit.fitHeight,
-                //   height: 600,
-                //   width: MediaQuery.of(context).size.width,
-                // ),
-
-                ),
+                    ))),
           ),
         ));
   }

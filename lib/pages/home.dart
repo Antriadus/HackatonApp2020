@@ -15,12 +15,14 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  BehaviorSubject<int> pageSubject = BehaviorSubject<int>.seeded(0);
-  BehaviorSubject<EarthStates> earthStateSubject =
+  final pageSubject = BehaviorSubject<int>.seeded(0);
+
+  final earthStateSubject =
       BehaviorSubject<EarthStates>.seeded(EarthStates.full);
-  BehaviorSubject<FabStates> fabStateSubject =
-      BehaviorSubject<FabStates>.seeded(FabStates.pinkOnly);
-  PageController controller = PageController();
+
+  final fabStateSubject = BehaviorSubject<FabStates>.seeded(FabStates.pinkOnly);
+
+  final controller = PageController();
 
   void animateToPage(int pageNumber) {
     try {
@@ -36,13 +38,14 @@ class _HomePageState extends State<HomePage> {
     super.initState();
     pageSubject.listen((value) {
       print("page: $value");
+      //dealing with hiding and showin earth
       if (value == 0)
         earthStateSubject.add(EarthStates.full);
       else if (value == 1)
         earthStateSubject.add(EarthStates.half);
       else
         earthStateSubject.add(EarthStates.hiden);
-
+      //dealing with fab text and visibility
       if (value == 5) {
         fabStateSubject.add(FabStates.both);
       } else if (value > 5) {
@@ -51,15 +54,6 @@ class _HomePageState extends State<HomePage> {
         fabStateSubject.add(FabStates.pinkOnly);
       }
     });
-    // pageSubject.listen((value) async {
-    //   if (value == null) return;
-    //   await controller.animateToPage(value,
-    //       duration: Duration(milliseconds: 500), curve: Curves.linear);
-    //   // controller.position.applyViewportDimension(
-    //   //     (axisSubject.value == Axis.horizontal
-    //   //         ? MediaQuery.of(context).size.width
-    //   //         : MediaQuery.of(context).size.height));
-    // });
   }
 
   @override
@@ -76,11 +70,12 @@ class _HomePageState extends State<HomePage> {
       builder: (context, snapshot) {
         var isVisble = snapshot.data != 0;
         return AnimatedOpacity(
-            duration: Duration(seconds: 2),
+            //TODO rework animation duration and curve cause it is too slow now
+            duration: Duration(seconds: 1),
             opacity: isVisble ? 1.0 : 0.0,
             curve: Curves.fastOutSlowIn,
             child: Padding(
-              padding: const EdgeInsets.only(top: 45, left: 32),
+              padding: const EdgeInsets.only(top: 24, left: 12),
               child: AppBackButton(onPressed: () {
                 if (snapshot.data == 0) {
                 } else {
@@ -107,22 +102,7 @@ class _HomePageState extends State<HomePage> {
               alignment: Alignment.topCenter,
               child: AnimatedAppTitleWidget(pageSubject: pageSubject),
             ),
-            // Align(
-            //     alignment: Alignment.center,
-            //     child: PageView.builder(
-            //       physics: NeverScrollableScrollPhysics(),
-            //       controller: controller,
-            //       itemBuilder: (context, index) {
-            //         if (index == 0) {
-            //           return buildPage1();
-            //         } else if (index == 1) {
-            //           return buildPage2();
-            //         } else if (index == 3) {
-            //           return buildPage3();
-            //         }
-            //         return Container();
-            //       },
-            //     )),
+            Align(alignment: Alignment.center, child: buildPageView()),
             Align(alignment: Alignment.topLeft, child: buildBackButton()),
           ],
         ),
@@ -130,29 +110,71 @@ class _HomePageState extends State<HomePage> {
     );
   }
 
-  Widget buildPage0() {
+  PageView buildPageView() {
+    var pages = {
+      0: buildHomePage(),
+      1: buildPlanetsPage(),
+      2: buildSpaceshipsPage(),
+      3: buildSeatsPage(),
+      4: buildCheckoutPage(),
+      5: buildThankYouPage(),
+      6: buildQRPage(),
+      // 7: buildQRPage(),
+    };
+    return PageView.builder(
+      physics: NeverScrollableScrollPhysics(),
+      controller: controller,
+      itemBuilder: (context, index) {
+        return pages[index] ?? Container();
+      },
+    );
+  }
+
+  Widget buildHomePage() {
     return Container();
   }
 
-  Widget buildPage1() {
-    return Container(
-      width: 50,
-      height: 50,
-      color: Colors.red,
+  Widget buildPlanetsPage() {
+    return Center(
+      child: Text("HERE SHOULD BE CHOOSE PLANET PAGE"),
     );
     // return AnimatedPlanetsCarouselWidget(
     //     arePlanetsShownSubject: arePlanetsShownSubject);
   }
 
-  Widget buildPage2() {
+  Widget buildSpaceshipsPage() {
     return SelectSpaceship();
   }
 
-  Widget buildPage3() {
-    return Container(
-      width: 50,
-      height: 50,
-      color: Colors.green,
+  Widget buildSeatsPage() {
+    return Center(
+      child: Container(
+        child: Text("HERE SHOULD BE CHOOSE SEATS PAGE"),
+      ),
+    );
+  }
+
+  Widget buildCheckoutPage() {
+    return Center(
+      child: Text("HERE SHOULD BE CHECKOUT PAGE"),
+    );
+  }
+
+  Widget buildThankYouPage() {
+    return Center(
+      child: Text("HERE SHOULD BE THANK YOU PAGE"),
+    );
+  }
+
+  Widget buildTicketsPage() {
+    return Center(
+      child: Text("HERE SHOULD BE YOUR TICKETS PAGE"),
+    );
+  }
+
+  Widget buildQRPage() {
+    return Center(
+      child: Text("HERE SHOULD BE TICKET DETAILS PAGE WITH QR CODE"),
     );
   }
 
@@ -199,10 +221,10 @@ class _HomePageState extends State<HomePage> {
                         height: 10,
                       ),
                       AppButton(
-                        titles[snapshot.data] ?? "",
+                        "RETURN HOME",
                         onTap: () {
-                          animateToPage(snapshot.data + 1);
-                          pageSubject.add(snapshot.data + 1);
+                          animateToPage(0);
+                          pageSubject.add(0);
                         },
                       )
                     ],

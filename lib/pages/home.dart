@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:hack2020/models/planet.dart';
 import 'package:hack2020/models/spaceship.dart';
 import 'package:hack2020/pages/select_spaceship.dart';
+import 'package:hack2020/pages/your_tickets.dart';
 import 'package:hack2020/widgets/animated_app_title.dart';
 import 'package:hack2020/widgets/animated_earth.dart';
 import 'package:hack2020/widgets/planets_carousel.dart';
@@ -152,8 +153,7 @@ class _HomePageState extends State<HomePage> {
       3: buildSeatsPage(),
       4: buildCheckoutPage(),
       5: buildThankYouPage(),
-      6: buildQRPage(),
-      // 7: buildQRPage(),
+      6: buildTicketsPage(),
     };
     return PageView.builder(
       physics: NeverScrollableScrollPhysics(),
@@ -203,9 +203,7 @@ class _HomePageState extends State<HomePage> {
   }
 
   Widget buildTicketsPage() {
-    return Center(
-      child: Text("HERE SHOULD BE YOUR TICKETS PAGE"),
-    );
+    return YourTickets();
   }
 
   Widget buildQRPage() {

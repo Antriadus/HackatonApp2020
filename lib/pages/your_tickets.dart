@@ -1,9 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:hack2020/pages/thank_you.dart';
 import 'package:hack2020/widgets/app_tile.dart';
-
-import '../widgets/app_back_button.dart';
 
 class YourTickets extends StatefulWidget {
   YourTickets({Key key}) : super(key: key);
@@ -15,17 +12,7 @@ class YourTickets extends StatefulWidget {
 class _YourTicketsState extends State<YourTickets> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: SafeArea(
-        child: Column(
-          children: <Widget>[
-            _buildAppBar(),
-            _buildHeader(),
-            _buildTicketsList(),
-          ],
-        ),
-      ),
-    );
+    return _buildTicketsList();
   }
 
   Widget _buildTicketsList() {
@@ -131,35 +118,6 @@ class _YourTicketsState extends State<YourTickets> {
               ),
             )
           ],
-        ),
-      ),
-    );
-  }
-
-  Widget _buildAppBar() {
-    return Container(
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: <Widget>[
-          AppBackButton(
-            onPressed: () => Navigator.of(context).pop(),
-          ),
-          Image.asset('assets/logo.png'),
-          const SizedBox(width: 66.0)
-        ],
-      ),
-    );
-  }
-
-  Widget _buildHeader() {
-    return Container(
-      padding: EdgeInsets.symmetric(vertical: 40.0),
-      child: Text(
-        "YOUR TICKETS",
-        style: const TextStyle(
-          fontFamily: 'Futura',
-          fontWeight: FontWeight.w700,
-          fontSize: 14.0,
         ),
       ),
     );

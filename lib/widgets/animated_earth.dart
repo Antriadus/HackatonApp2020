@@ -30,13 +30,14 @@ class _AnimatedEarthWidgetState extends State<AnimatedEarthWidget> {
     var displayHeight = MediaQuery.of(context).size.height;
     return StreamBuilder<bool>(
         stream: widget.arePlanetsShownSubject,
+        initialData: false,
         builder: (context, snapshot) {
           return StreamBuilder<bool>(
               stream: widget.arePlanetsShownSubject,
               builder: (context, snapshot) {
                 var isOnBottom = snapshot?.data ?? false;
                 return AnimatedPositioned(
-                    top: isOnBottom ? displayHeight * 0.9 : displayHeight * 0.7,
+                    top: isOnBottom ? displayHeight : displayHeight * 0.7,
                     curve: Curves.fastOutSlowIn,
                     duration: Duration(seconds: 2),
                     child: Container(

@@ -4,9 +4,6 @@ import 'package:flutter/material.dart';
 import '../models/spaceship.dart';
 import '../services/spaceship/in_memory_impl.dart';
 import '../services/spaceship/interface.dart';
-import '../widgets/app_back_button.dart';
-import '../widgets/app_button.dart';
-import 'checkout.dart';
 
 class SelectSpaceship extends StatefulWidget {
   SelectSpaceship({Key key}) : super(key: key);
@@ -36,30 +33,14 @@ class _SelectSpaceshipState extends State<SelectSpaceship>
   }
 
   @override
+  void dispose() {
+    animationController.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: SafeArea(
-          child: Column(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: <Widget>[
-          Column(
-            children: <Widget>[
-              _buildAppBar(),
-              _buildHeader(),
-              _buildCarousel(),
-            ],
-          ),
-          AppButton(
-            'BOOK A SEAT',
-            onTap: () => Navigator.of(context).push(
-              MaterialPageRoute(
-                builder: (context) => Checkout(),
-              ),
-            ),
-          )
-        ],
-      )),
-    );
+    return _buildCarousel();
   }
 
   Widget _buildHeader() {
@@ -84,7 +65,7 @@ class _SelectSpaceshipState extends State<SelectSpaceship>
           return Transform.scale(
               scale: 1.2,
               child: CarouselSlider(
-                items: state.data.map(_buildSpaceshipTile).toList(),
+                items: state.data.map(buildSpaceshipTile).toList(),
                 options: CarouselOptions(
                   height: 400.0,
                   aspectRatio: 1.25,
@@ -101,22 +82,22 @@ class _SelectSpaceshipState extends State<SelectSpaceship>
     );
   }
 
-  Widget _buildAppBar() {
-    return Container(
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: <Widget>[
-          AppBackButton(
-            onPressed: () => Navigator.of(context).pop(),
-          ),
-          Image.asset('assets/logo.png'),
-          const SizedBox(width: 66.0)
-        ],
-      ),
-    );
-  }
+  // Widget _buildAppBar() {
+  //   return Container(
+  //     child: Row(
+  //       mainAxisAlignment: MainAxisAlignment.spaceBetween,
+  //       children: <Widget>[
+  //         AppBackButton(
+  //           onPressed: () => Navigator.of(context).pop(),
+  //         ),
+  //         Image.asset('assets/logo.png'),
+  //         const SizedBox(width: 66.0)
+  //       ],
+  //     ),
+  //   );
+  // }
 
-  Widget _buildSpaceshipTile(Spaceship spaceship) {
+  Widget buildSpaceshipTile(Spaceship spaceship) {
     return Container(
       decoration: BoxDecoration(
         image: DecorationImage(

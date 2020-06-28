@@ -7,6 +7,8 @@ import 'package:hack2020/widgets/app_back_button.dart';
 import 'package:hack2020/widgets/app_button.dart';
 import 'package:rxdart/subjects.dart';
 
+enum earthStates { full, half, hiden }
+
 class HomePage extends StatefulWidget {
   @override
   _HomePageState createState() => _HomePageState();
@@ -71,7 +73,7 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      // backgroundColor: Colors.black,
+      backgroundColor: Colors.black,
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
       floatingActionButton: buildFab(),
       body: Stack(
@@ -149,9 +151,10 @@ class _HomePageState extends State<HomePage> {
                   }
                 } else {
                   onClick = () {
-                    controller.animateToPage(snapshot.data,
+                    controller.animateToPage(snapshot.data + 1,
                         duration: Duration(milliseconds: 500),
                         curve: Curves.linear);
+                    pageSubject.add(snapshot.data + 1);
                   };
                 }
                 if (snapshot.data == 0) {
@@ -161,7 +164,9 @@ class _HomePageState extends State<HomePage> {
                 } else if (snapshot.data == 1) {
                   title = "BOOK A SEAT";
                 } else if (snapshot.data == 2) {
-                  title = "!!!!";
+                  title = "CHECKOUT";
+                } else if (snapshot.data == 3) {
+                  title = "PAY WITH CHIPSET";
                 }
 
                 return AppButton(

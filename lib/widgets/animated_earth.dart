@@ -3,6 +3,7 @@ import 'package:hack2020/pages/home.dart';
 import 'package:rxdart/rxdart.dart';
 import 'package:video_player/video_player.dart';
 
+
 class AnimatedEarthWidget extends StatefulWidget {
   final BehaviorSubject<EarthStates> earthSubject;
 

@@ -1,4 +1,4 @@
-# hack2020
+# Space Travel
 
 App creted in 48h for Hack2020 flutter hackaton . Space Travel app is like Uber but for spaceships.
 

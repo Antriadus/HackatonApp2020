@@ -57,43 +57,79 @@ class PlanetCarousel extends StatelessWidget {
           Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Container(
-                height: 180.0,
-                child: CarouselSlider(
-                  options: CarouselOptions(
-                    height: 180.0,
-                    aspectRatio: 1.25,
-                    enableInfiniteScroll: true,
-                    initialPage: 1,
-                    onPageChanged: (index, reason) {
-                      try {
-                        currentItemSubject.add(index);
-                        planetSubject.add(planets[index]);
-                      } catch (e) {
-                        print(e);
-                        print(e);
-                      }
-                    },
-                    viewportFraction: 0.4,
-                  ),
-                  items: planets.map((item) {
-                    return StreamBuilder<int>(
-                        initialData: 1,
-                        stream: currentItemSubject,
-                        builder: (context, snapshot) {
-                          return PlanetCarouselItem(
-                            model: item,
-                            isSelected: item == planets[snapshot.data],
-                          );
-                        });
-                  }).toList(),
-                ),
-              ),
+              _showCarouselSlider(),
               CurrentPlanetDistance(
                   currentItemSubject: currentItemSubject, planets: planets)
             ],
           ),
         ],
+      ),
+    );
+  }
+
+  Container _showCarouselSlider2() {
+    return Container(
+      height: 180.0,
+      child: CarouselSlider.builder(
+        options: CarouselOptions(
+          height: 180.0,
+          aspectRatio: 1.25,
+          enableInfiniteScroll: true,
+          initialPage: 1,
+          onPageChanged: (index, reason) {
+            try {
+              currentItemSubject.add(index);
+              planetSubject.add(planets[index]);
+            } catch (e) {
+              print(e);
+              print(e);
+            }
+          },
+          viewportFraction: 0.4,
+        ),
+        itemCount: planets.length,
+        itemBuilder: (context, index) {
+          Planet planet = planets[index];
+          return PlanetCarouselItem(
+            model: planet,
+            //isSelected: planet == planets[snapshot.data],
+          );
+        },
+      ),
+    );
+  }
+
+  Container _showCarouselSlider() {
+    return Container(
+      height: 180.0,
+      child: CarouselSlider(
+        options: CarouselOptions(
+          height: 180.0,
+          aspectRatio: 1.25,
+          enableInfiniteScroll: true,
+          initialPage: 1,
+          onPageChanged: (index, reason) {
+            try {
+              currentItemSubject.add(index);
+              planetSubject.add(planets[index]);
+            } catch (e) {
+              print(e);
+              print(e);
+            }
+          },
+          viewportFraction: 0.4,
+        ),
+        items: planets.map((item) {
+          return StreamBuilder<int>(
+              initialData: 1,
+              stream: currentItemSubject,
+              builder: (context, snapshot) {
+                return PlanetCarouselItem(
+                  model: item,
+                  isSelected: item == planets[snapshot.data],
+                );
+              });
+        }).toList(),
       ),
     );
   }

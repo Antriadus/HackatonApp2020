@@ -120,7 +120,9 @@ class Checkout extends StatelessWidget {
                             padding: EdgeInsets.only(right: 16.0),
                             child: Transform.scale(
                               scale: 2.6,
-                              child: Image.asset(snapshot?.data?.image),
+                              child: Hero(
+                                  tag: 'spaceship',
+                                  child: Image.asset(snapshot?.data?.image)),
                             ),
                           ),
                         ],

@@ -18,7 +18,7 @@ class _ThankYouState extends State<ThankYou> {
       margin: const EdgeInsets.only(bottom: 70.0),
       child: Column(
         children: <Widget>[
-          Image.asset('assets/spaceships/1.png'),
+          Hero(tag: 'spaceship', child: Image.asset('assets/spaceships/1.png')),
           Text(
             "Spaceship name",
             style: const TextStyle(

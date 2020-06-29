@@ -1,24 +1,25 @@
+import 'dart:io';
+
+import 'package:device_preview/device_preview.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:hack2020/pages/home.dart';
-import 'package:hack2020/utils/screen_size.dart';
 
-void main() {
-  runApp(MyApp());
-}
+void main() => runApp(
+      DevicePreview(
+        enabled: true,
+        builder: (context) => MyApp(),
+      ),
+    );
 
 class MyApp extends StatelessWidget {
-  void _setScreenSize(BuildContext context) {
-    ScreenSize _screenSize = ScreenSize();
-    _screenSize.setSize = MediaQuery.of(context).size;
-    _screenSize.setPadding = MediaQuery.of(context).padding;
-  }
-
   @override
   Widget build(BuildContext context) {
     //_setScreenSize(context);
     return MaterialApp(
       debugShowCheckedModeBanner: false,
+      locale: DevicePreview.of(context).locale, // <--- Add the locale
+      builder: DevicePreview.appBuilder,
       title: 'Flutter Demo',
       theme: ThemeData.dark().copyWith(
         scaffoldBackgroundColor: kIsWeb

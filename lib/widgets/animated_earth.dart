@@ -40,8 +40,8 @@ class _AnimatedEarthWidgetState extends State<AnimatedEarthWidget> {
     };
     return AnimatedPositioned(
       top: displayHeight * topFactors[widget.earthSubject.value],
-      curve: Curves.fastOutSlowIn,
-      duration: Duration(seconds: 2),
+      curve: Curves.decelerate,
+      duration: Duration(milliseconds: 250),
       child: Container(
         height: 500,
         width: MediaQuery.of(context).size.width,

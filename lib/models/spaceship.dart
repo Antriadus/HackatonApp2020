@@ -5,17 +5,18 @@ class Spaceship {
   final String name;
   final SpaceshipType type;
   final String description;
-  final double price;
-  final String info;
+  final int price;
+  final int days;
+  final bool isPositive;
   final String image;
-  final int seatsCount;
 
   Spaceship(
       {this.name,
       this.type,
       this.description,
       this.price,
-      this.info,
+      this.days,
+      this.isPositive,
       this.image,
-      @required this.seatsCount});
+     });
 }

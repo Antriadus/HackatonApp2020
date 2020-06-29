@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
 import 'package:hack2020/models/planet.dart';
 import 'package:hack2020/models/spaceship.dart';
 import 'package:hack2020/pages/select_spaceship.dart';
@@ -31,12 +32,11 @@ class _HomePageState extends State<HomePage> {
   final fabStateSubject = BehaviorSubject<FabStates>.seeded(FabStates.pinkOnly);
   final selectedSeatsSubject = BehaviorSubject<List<int>>.seeded([]);
   final selectedSpaceshipSubject = BehaviorSubject<Spaceship>.seeded(Spaceship(
-      name: 'Spaceship name',
-      description: 'Description',
-      price: 34.99,
-      info: 'This spaceship is ...',
-      image: 'assets/spaceships/1.png',
-      seatsCount: 24));
+    name: 'Spaceship name',
+    description: 'Description',
+    price: 1000,
+    image: 'assets/spaceships/1.png',
+  ));
 
   final selectedPlanetSubject = BehaviorSubject<Planet>.seeded(
     Planet(
@@ -55,6 +55,34 @@ class _HomePageState extends State<HomePage> {
     } catch (e) {
       print(e);
     }
+  }
+
+  Future<void> _showMyDialog() async {
+    return showDialog<void>(
+      context: context,
+      barrierDismissible: false, // user must tap button!
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: Text('Hello'),
+          content: SingleChildScrollView(
+            child: ListBody(
+              children: <Widget>[
+                Text(
+                    'Please check our application using iPhone 8 in device preview.'),
+              ],
+            ),
+          ),
+          actions: <Widget>[
+            FlatButton(
+              child: Text('Ok'),
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+            ),
+          ],
+        );
+      },
+    );
   }
 
   @override
@@ -77,6 +105,9 @@ class _HomePageState extends State<HomePage> {
       } else {
         fabStateSubject.add(FabStates.pinkOnly);
       }
+    });
+    SchedulerBinding.instance.addPostFrameCallback((timeStamp) async {
+      await _showMyDialog();
     });
   }
 
@@ -172,8 +203,28 @@ class _HomePageState extends State<HomePage> {
   Widget buildPlanetsPage() {
     return Padding(
       padding: const EdgeInsets.only(bottom: 64.0),
-      child: PlanetCarousel(
-        planetSubject: selectedPlanetSubject,
+      child: Stack(
+        children: <Widget>[
+          PlanetCarousel(
+            planetSubject: selectedPlanetSubject,
+          ),
+          IgnorePointer(
+            child: Container(
+              width: double.infinity,
+              decoration: BoxDecoration(
+                  gradient: LinearGradient(
+                      //stops: [0, 0.1, 0.9, 1],
+                      begin: Alignment.centerLeft,
+                      end: Alignment.centerRight,
+                      colors: [
+                    Theme.of(context).scaffoldBackgroundColor,
+                    Theme.of(context).scaffoldBackgroundColor.withOpacity(0),
+                    Theme.of(context).scaffoldBackgroundColor.withOpacity(0),
+                    Theme.of(context).scaffoldBackgroundColor
+                  ])),
+            ),
+          )
+        ],
       ),
     );
   }
@@ -278,7 +329,11 @@ class _HomePageState extends State<HomePage> {
                         appButtonColor: AppButtonColor.Mono,
                         onTap: () {
                           selectedSeatsSubject.add([]);
-                          animateToPage(0);
+                          try {
+                            controller.jumpToPage(0);
+                          } catch (e) {
+                            print(e);
+                          }
                           pageSubject.add(0);
                         },
                       )

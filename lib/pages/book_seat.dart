@@ -33,9 +33,9 @@ class _BookSeatState extends State<BookSeat> {
 
   @override
   void initState() {
+    print(widget.spaceship.type);
     missedSeats = 0;
-    seatsList = List<int>.generate(
-        widget.spaceship.seatsCount, (i) => _generateSeatList(i));
+    seatsList = List<int>.generate(42, (i) => _generateSeatList(i));
     selectedSeatsList = widget.selectedSeatsSubject.value;
     super.initState();
   }
